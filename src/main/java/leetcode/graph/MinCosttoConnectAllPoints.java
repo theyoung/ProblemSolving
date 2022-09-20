@@ -3,9 +3,7 @@ package leetcode.graph;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * 1584. Min Cost to Connect All Points
@@ -17,12 +15,52 @@ public class MinCosttoConnectAllPoints {
     void test(){
         MinCosttoConnectAllPoints min = new MinCosttoConnectAllPoints();
 
+        Assertions.assertEquals(20,min.minCostConnectPointsKuruska(new int[][]{{0,0},{2,2},{3,10},{5,2},{7,0}}));
+        Assertions.assertEquals(18,min.minCostConnectPointsKuruska(new int[][]{{3,12}, {-2,5}, {-4,1}}));
+
         Assertions.assertEquals(20,min.minCostConnectPoints(new int[][]{{0,0},{2,2},{3,10},{5,2},{7,0}}));
         Assertions.assertEquals(18,min.minCostConnectPoints(new int[][]{{3,12}, {-2,5}, {-4,1}}));
     }
 
+    //with Prim
+    public int minCostConnectPoints(int[][] points){
+        boolean[] grouped = new boolean[points.length];
+        Arrays.fill(grouped,false);
 
-    public int minCostConnectPoints(int[][] points) {
+        int sum = 0;
+        int edgeCount = 0;
+        int start = 0;
+        grouped[0] = true;
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->a[0]-b[0]);
+
+        while (edgeCount < points.length - 1) {
+            for (int end = 0; end < points.length; end++) {
+                if(grouped[end]) continue;
+
+                int weight = Math.abs(points[start][0]-points[end][0]) + Math.abs(points[start][1]-points[end][1]);
+                pq.add(new int[]{weight, end});
+            }
+
+            boolean peek = false;
+            while (!peek && 0 < pq.size()) {
+                int[] next = pq.poll();
+
+                if(!grouped[next[1]]){
+                    sum += next[0];
+                    grouped[next[1]] = true;
+                    peek = true;
+                    start = next[1];
+                    edgeCount++;
+                }
+            }
+        }
+
+        return sum;
+    }
+
+    //withKruskal
+    public int minCostConnectPointsKuruska(int[][] points) {
 
         List<int[]> list = new ArrayList<>();
 
