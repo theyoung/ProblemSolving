@@ -1,75 +1,54 @@
 package leetcode.tree;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.TreeMap;
 
 /**
  * 732. My Calendar III
  * https://leetcode.com/problems/my-calendar-iii/
  */
 
+//TODO 캘린더 2와 함께 다시 풀어 보는게 좋을 것 같다. 문제 이해가 어려웠는데, 특정 값을 넣고 전체 값의 max를 찾는 질문이었다.
 public class MyCalendarIII {
-    ArrayList<int[]> queue;
+    TreeMap<Integer, Integer> map;
+
+    @Test
+    void test(){
+        MyCalendarIII calendarIII = new MyCalendarIII();
+        System.out.println(calendarIII.book(10,20));
+        System.out.println(calendarIII.book(50,60));
+        System.out.println(calendarIII.book(10,40));
+        System.out.println(calendarIII.book(5,15));
+        System.out.println(calendarIII.book(5,10));
+        System.out.println(calendarIII.book(25,55));
+    }
 
     public MyCalendarIII() {
-        queue = new ArrayList<>();
+        map = new TreeMap<>();
     }
 
     public int book(int start, int end) {
-        queue.sort((a,b)->{
-            if(a[0] == b[0]){
-                return a[1] - b[1];
-            }
-            return a[0] - b[0];
-        });
+        map.put(start, map.getOrDefault(start, 0) + 1);
+        map.put(end, map.getOrDefault(end, 0) - 1);
 
-        int result = 0;
-        int left = 0;
-        int right = queue.size();
+        int active = 0;
+        int max = 0;
 
-        while(left < right){
-            int center = left + (right-left)/2;
-            int[] cur = queue.get(center);
+        for (Map.Entry<Integer,Integer> set : map.entrySet()) {
+            int key = set.getKey();
+            int val = set.getValue();
 
-            //no intersection
-            if(cur[1] < start){
-                left = center + 1;
-            } else if(end < cur[0]){
-                right = center - 1;
-            } else {
-                // cur[0] <= end, start <= cur[1]
-
-                //------------cur[0][1]----------
-                //------------|------|-----------
-                //-----|-----|------------------- -> right move
-                //---------------------|----|---- -> left move
-                //----------|---|---------------- -> intersection
-                //-------------------|--|-------- -> intersection
-                //----------------|-|------------ -> intersection
-                left = center;
-                right = center;
-                break;
-            }
-        }
-        int count = 1;
-
-        while(0 <= left || right < queue.size()){
-            boolean intersection = false;
-            if(start <= queue.get(left)[1] && queue.get(left)[0] <= end) {
-                count++;
-                left--;
-                intersection = true;
-            }
-            if(start <= queue.get(right)[1] && queue.get(right)[0] <= end) {
-                count++;
-                right++;
-                intersection = true;
-            }
-            if(!intersection) break;
+//            if (start <= key && key < end) {
+                active += val;
+                max = Math.max(max, active);
+//            }
         }
 
-        queue.add(new int[]{start,end});
-        return result;
+        return max;
     }
 
 }
