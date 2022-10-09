@@ -9,7 +9,7 @@ import java.util.List;
  * https://leetcode.com/problems/two-sum-iv-input-is-a-bst/
  */
 
-//TODO inorder로 sorted된 list를 얻어와서 k를 찾는 방법을 배울 수 있다.
+//TODO inorder로 sorted된 list를 얻어와서 k를 찾는 방법을 배울 수 있다. Set을 활용하는 것도 괜찮을 것 같다.
 public class TwoSumIV {
     public boolean findTarget(TreeNode root, int k) {
         List<Integer> list = new ArrayList<>();
