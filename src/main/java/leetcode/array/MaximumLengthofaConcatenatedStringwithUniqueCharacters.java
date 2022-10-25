@@ -16,6 +16,7 @@ import java.util.Set;
 //각 array의 elements는 선택될 수도 있고 선택 되지 않을 수 있다. 2가지의 경우의 수를 갖음으로 O(2^N)이 된다.
 //하기 문제를 dp로 최적화 가능한지 생각을 많이 해봤지만 앞선 결과가 이후에 오는 결과에 영향을 주게 되어서 dp를 사용하지 못했는데,
 //답을 봐도 별 방법이 없는 것으로 보인다.
+//TODO bit operation과 bottomup으로 변경 가능하다.
 public class MaximumLengthofaConcatenatedStringwithUniqueCharacters {
     @Test
     void test(){
