@@ -1,9 +1,8 @@
-package leetcode.string;
+package leetcode.stack;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Deque;
 import java.util.LinkedList;
 
 /**
