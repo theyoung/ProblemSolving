@@ -1,14 +1,16 @@
 package leetcode.tree;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 437. Path Sum III
  * https://leetcode.com/problems/path-sum-iii/
  */
 
-//TODO HashMap을 이용한 Prefix sum으로 다시 풀어보자. https://leetcode.com/problems/subarray-sum-equals-k/
+//TODO HashMap을 이용한 Prefix sum으로 다시 풀어보자. https://leetcode.com/problems/subarray-sum-equals-k/, 다시 풀었다. prefix sum의 range를 고민하자.
 public class PathSumIII {
     int result = 0;
 
@@ -19,6 +21,33 @@ public class PathSumIII {
         // 일단 brute force dfs로 처리해 보자.
 
         return dfs(root, targetSum, new ArrayList<>());
+    }
+
+    public int pathSumHash(TreeNode root, int targetSum) {
+        Map<Long,Integer> map = new HashMap<>();
+        map.put(0L,1);
+        return helper(root, targetSum, map, 0);
+    }
+
+    int helper(TreeNode node, int targetSum, Map<Long,Integer> map, long prefixSum){
+        if(node == null) return 0;
+
+        prefixSum += node.val;
+
+        int result = 0;
+        if(map.containsKey(prefixSum-targetSum)){
+            result += map.get(prefixSum-targetSum);
+        }
+        // System.out.println(prefixSum + " " + map.get(prefixSum-targetSum));
+        map.put(prefixSum, map.getOrDefault(prefixSum,0)+1);
+
+        result += helper(node.left, targetSum, map, prefixSum);
+
+        result += helper(node.right, targetSum, map, prefixSum);
+
+        map.put(prefixSum, map.getOrDefault(prefixSum,0)-1);
+
+        return result;
     }
 
     //list는 prefixsum을 기준으로 만들어 진다.
