@@ -8,7 +8,7 @@ import java.util.List;
  * https://leetcode.com/problems/maximum-width-of-binary-tree/?envType=study-plan&id=level-3
  */
 //1735
-//TODO BFS를 활용하고 node의 val을 활용하자. 못 풀었다. 다시 풀자.
+//TODO BFS를 활용하고 node의 val을 활용하자. 못 풀었다. 다시 풀자. DFS를 활용하는 방법도 도전해 보자.
 public class MaximumWidthofBinaryTree {
     public int widthOfBinaryTree(TreeNode root) {
         //bfs를 활용해 보자.
