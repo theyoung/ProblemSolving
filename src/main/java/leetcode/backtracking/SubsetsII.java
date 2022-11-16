@@ -1,4 +1,4 @@
-package leetcode.bit;
+package leetcode.backtracking;
 
 import org.junit.jupiter.api.Test;
 

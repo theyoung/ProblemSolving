@@ -1,4 +1,4 @@
-package leetcode.bit;
+package leetcode.backtracking;
 
 import java.sql.Array;
 import java.util.ArrayList;
