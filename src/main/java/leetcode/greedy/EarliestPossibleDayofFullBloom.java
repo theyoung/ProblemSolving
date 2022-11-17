@@ -6,18 +6,41 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.PriorityQueue;
 
 /**
  * 2136. Earliest Possible Day of Full Bloom
  * https://leetcode.com/problems/earliest-possible-day-of-full-bloom/
  */
 public class EarliestPossibleDayofFullBloom {
+    //2337
+    //2346
+    public int earliestFullBloom(int[] plantTime, int[] growTime) {
+        // plantTime과 groTime으로 2D 만들어 준다.
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b)->b[1] - a[1]);
+
+        for(int i = 0; i < plantTime.length; i++){
+            pq.add(new int[]{plantTime[i],growTime[i]});
+        }
+
+        // growTime이 가장 긴것 부터 plant를 시켜준다.
+        int plantDay = 0;
+        int maxDay = 0;
+        while(!pq.isEmpty()){
+            int[] cur = pq.poll();
+            plantDay += cur[0];
+            maxDay = Math.max(maxDay, plantDay+cur[1]);
+        }
 
 
+        // 모든 planttime을 더하고, 남은 가장 긴 growtime을 더해준다.
+        // -> max day를 계산해서 return 하자.
+        return maxDay;
+    }
 
     //growTime이후에 꽃을 발화시킴으로 growTime +1이 발화를 위한 시간이 된다.
     //다만 day의 시작이 0이라는 것을 주의하자.
-    public int earliestFullBloom(int[] plantTime, int[] growTime) {
+    public int earliestFullBloomPre(int[] plantTime, int[] growTime) {
 
         //하누에 하나의 planting만 가능하다.
         //planting을 시작하면 plantTime동안은 아무것도 할 수 없다.
