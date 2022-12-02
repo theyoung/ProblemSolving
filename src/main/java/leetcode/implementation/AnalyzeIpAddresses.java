@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.Reader;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,7 +13,7 @@ analyzeIpAddresses
 https://app.codesignal.com/company-challenges/verkada
  */
 //TODO BufferedReader, FileReader, try with resource, Pattern, Matcher 등을 활용하는 테스트
-public class analyzeIpAddresses {
+public class AnalyzeIpAddresses {
 
     @Test
     void test() {
