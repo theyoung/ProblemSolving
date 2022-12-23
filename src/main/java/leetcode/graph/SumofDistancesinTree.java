@@ -138,6 +138,17 @@ public class SumofDistancesinTree {
     }
 
     /*
+    뒤늦게 깨닳았는데
+
+    sum(root) = left_sum + left_node_count + right_sum +right_node_count
+    이기 때문에
+    이 전체 그래프에서 root가 left로 접근 하는 value를 빼고
+    left_sum  + right_sum +right_node_count
+    left가 root로 접근하는 value 를 더하면
+    left_sum  + right_sum +right_node_count + N - left_node_count
+    sum(root)-left_node_count + N - left_node_count
+    라는 수식이 나올 수 있다.
+
                 0 19(9)
               /   \
         1(2) 1     0 10(6)
