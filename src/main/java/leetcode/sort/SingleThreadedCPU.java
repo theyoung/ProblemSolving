@@ -7,13 +7,13 @@ https://leetcode.com/problems/single-threaded-cpu/description/
 //TODO sorting을 기본으로 하면서, time이전의 task가 모두 동일한 기준이라는 착안을 하는게 중요했다.
 public class SingleThreadedCPU {
     //T.C는 O(nlogn)이다 sorting에 가장 많은 시간을 쓰고, tasklist는 한번씩만 접근함으로 nlogn이다
-    //S.C는 O(n) tasks의 length를 담는 큐와 Task 리스트가 필요함으로 n이
+    //S.C는 O(n) tasks의 length를 담는 큐와 Task 리스트가 필요함으로 n이다
     class Task {
         int index;
         int startTime;
         int endTime;
 
-        public Task(int index, int startTime, int endTime){다
+        public Task(int index, int startTime, int endTime){
             this.index = index;
             this.startTime = startTime;
             this.endTime = endTime;
